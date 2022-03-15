@@ -25,7 +25,7 @@ namespace RepositoryLayer.Service
 
         }
 
-        public UserEntity Registration(UserRegistration User)
+        public UserEntity Registration(UserRegModel User)
         {
             try
             {
@@ -85,6 +85,51 @@ namespace RepositoryLayer.Service
               signingCredentials: credentials);
             return new JwtSecurityTokenHandler().WriteToken(token);
 
+        }
+        public string ForgetPassword(string email)
+        {
+            try
+            {
+               var user = fundooContext.User.Where(x => x.Email == email).FirstOrDefault();
+                if (user != null)
+                {
+                    var token = GenerateSecurityToken(user.Email, user.Id);
+                    new MsmqModel().Sender(token);
+                    return token;
+                }
+                else
+                {
+                    return null;
+                }
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool ResetPassWord(string email, string password, string confirmPassword)
+        {
+            try
+            {
+                if(password.Equals(confirmPassword))
+                {
+                    var user = fundooContext.User.Where(x => x.Email == email).FirstOrDefault();
+                    user.Password = confirmPassword;
+                    fundooContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

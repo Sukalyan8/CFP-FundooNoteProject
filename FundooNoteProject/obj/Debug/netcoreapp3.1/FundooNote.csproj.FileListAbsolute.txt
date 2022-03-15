@@ -62,3 +62,7 @@ C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCo
 C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Swashbuckle.Core.dll
 C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\WebActivatorEx.dll
 C:\Users\Hp\source\repos\FundooNote\obj\Debug\netcoreapp3.1\FundooNote.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Experimental.System.Messaging.dll
