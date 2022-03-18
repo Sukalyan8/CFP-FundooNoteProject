@@ -6,6 +6,7 @@ namespace RepositoryLayer.Migrations
     public partial class Notes : Migration
     {
         public static object Title { get; internal set; }
+        public string Colour { get; internal set; }
 
         protected override void Up(MigrationBuilder migrationBuilder)
         {

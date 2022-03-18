@@ -1,7 +1,9 @@
 ﻿using BusinessLayer.Interface;
 using CommonLayer.Model;
+using Microsoft.AspNetCore.Http;
 using RepositoryLayer.Entity;
 using RepositoryLayer.Interface;
+using RepositoryLayer.Migrations;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +16,19 @@ namespace BusinessLayer.Service
         public NoteBL(INoteRL noteRL)
         {
             this.noteRL = noteRL;
+        }
+
+        public bool ChangeColour(long noteId, long userId, ChangeColour notesModel)
+        {
+            try
+            {
+                return noteRL.ChangeColour(noteId, userId, notesModel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public NoteEntity CreateNote(NotesModel Notes, long userId)
@@ -55,11 +70,11 @@ namespace BusinessLayer.Service
             }
         }
 
-        public bool IsArchieve(long noteId, long userId)
+        public bool IsArchieve(long noteId)
         {
             try
             {
-                return noteRL.IsArchieve(noteId, userId);
+                return noteRL.IsArchieve(noteId);
             }
             catch (Exception)
             {
@@ -68,11 +83,11 @@ namespace BusinessLayer.Service
             }
         }
 
-        public bool IsPinned(long noteId, long userId)
+        public bool IsPinned(long noteId)
         {
             try
             {
-                return noteRL.IsPinned(noteId, userId);
+                return noteRL.IsPinned(noteId);
             }
             catch (Exception)
             {
@@ -99,6 +114,20 @@ namespace BusinessLayer.Service
             try
             {
                 return noteRL.UpdateNote(updateNote, noteId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public NoteEntity UploadImage(long noteId, long userId, IFormFile image)
+        {
+
+            try
+            {
+                return noteRL.UploadImage(noteId,userId,image);
             }
             catch (Exception)
             {

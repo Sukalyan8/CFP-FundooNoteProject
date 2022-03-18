@@ -4,6 +4,7 @@ using CommonLayer.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RepositoryLayer.Entity;
+using RepositoryLayer.Migrations;
 using RepositoryLayer.Service;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,7 @@ namespace FundooNote.Controllers
             }
         }
 
-        [HttpGet("{id}/Get")]
+        [HttpGet("{id}/Retrieve")]
         public NoteEntity GetNote(long noteId)
         {
             try
@@ -102,10 +103,10 @@ namespace FundooNote.Controllers
                 throw;
             }
         }
-        [HttpPut("Pinned")]
-        public IActionResult IsPinned(long noteId, long userID)
+        [HttpPut("IsPinned")]
+        public IActionResult IsPinned(long noteId)
         {
-            bool result = noteBL.IsPinned(noteId, userID);
+            bool result = noteBL.IsPinned(noteId);
 
             try
             {
@@ -123,10 +124,10 @@ namespace FundooNote.Controllers
                 throw;
             }
         }
-        [HttpPut("Archieve")]
-        public IActionResult IsArchieve(long noteId, long userID)
+        [HttpPut("IsArchieve")]
+        public IActionResult IsArchieve(long noteId)
         {
-            bool result = noteBL.IsArchieve(noteId, userID);
+            bool result = noteBL.IsArchieve(noteId);
 
             try
             {
@@ -144,7 +145,7 @@ namespace FundooNote.Controllers
                 throw;
             }
         }
-        [HttpPut("Trash")]
+        [HttpPut("IsTrash")]
         public IActionResult IsTrash(long noteId)
         {
             bool result = noteBL.IsTrash(noteId);
@@ -163,6 +164,55 @@ namespace FundooNote.Controllers
             catch (Exception)
             {
                 throw;
+            }
+
+        }
+        [Authorize]
+        [HttpPost("ImageUpload")]
+        public IActionResult UploadImage(long noteId, IFormFile image)
+        {
+            try
+            {
+                // Take id of  Logged In User
+                var userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
+                var result = this.noteBL.UploadImage(noteId, userId, image);
+                if (result != null)
+                {
+                    return this.Ok(new { Success = true, message = "Image Uploaded Successfully", data = result });
+                }
+                else
+                {
+                    return this.BadRequest(new { Success = false, message = "Image Upload Failed ! Try Again " });
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        //Change colour
+        [Authorize]
+        [HttpPut("Colour")]
+        public IActionResult ChangeColour(long noteId, ChangeColour notesModel)
+        {
+            var userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
+            bool result = noteBL.ChangeColour(noteId, userId, notesModel);
+
+            try
+            {
+                if (result == true)
+                {
+                    return Ok(new { Success = true, message = "Color changed Successfully !!" });
+                }
+                else
+                {
+                    return BadRequest(new { Success = false, message = "Color not changed !!" });
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { Success = false, message = e.Message, stackTrace = e.StackTrace });
             }
         }
     }

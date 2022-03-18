@@ -1,5 +1,9 @@
-﻿using CommonLayer.Model;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using CommonLayer.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Octokit;
 using RepositoryLayer.Context;
 using RepositoryLayer.Entity;
 using RepositoryLayer.Interface;
@@ -8,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Account = CloudinaryDotNet.Account;
 
 namespace RepositoryLayer.Service
 {
@@ -15,13 +20,13 @@ namespace RepositoryLayer.Service
     {
         //instance of  FundooContext Class
         private readonly FundooContext fundooContext;
-        private IConfiguration _config;
+        private readonly IConfiguration _config;
 
         //Constructor
-        public NoteRL(FundooContext fundooContext, IConfiguration configuration)
+        public NoteRL(FundooContext fundooContext, IConfiguration _config)
         {
             this.fundooContext = fundooContext;
-            this._config = configuration;
+            this._config = _config;
 
         }
         //Method to Create Notes Details.
@@ -62,7 +67,6 @@ namespace RepositoryLayer.Service
                 {
                     note.Title = updateNote.Title;
                     note.Description = updateNote.Description;
-                    note.Colour = updateNote.Colour;
                     note.Image = updateNote.Image;
                     note.id = noteId;
                     fundooContext.Notes.Update(note);
@@ -131,11 +135,11 @@ namespace RepositoryLayer.Service
             }
         }
         //Method to IsPinned Details.
-        public bool IsPinned(long noteId, long userId)
+        public bool IsPinned(long noteId)
         {
             try
             {
-                var notes = fundooContext.Notes.FirstOrDefault(e => e.NotesId == noteId && e.id == userId);
+                var notes = fundooContext.Notes.FirstOrDefault(e => e.NotesId == noteId);
 
                 if (notes != null)
                 {
@@ -163,11 +167,11 @@ namespace RepositoryLayer.Service
             }
         }
         //Method to IsArchieve Details.
-        public bool IsArchieve(long noteId, long userId)
+        public bool IsArchieve(long noteId)
         {
             try
             {
-                var notes = fundooContext.Notes.FirstOrDefault(e => e.NotesId == noteId && e.id == userId);
+                var notes = fundooContext.Notes.FirstOrDefault(e => e.NotesId == noteId);
 
                 if (notes != null)
                 {
@@ -224,6 +228,76 @@ namespace RepositoryLayer.Service
             {
                 throw;
             }
+        }
+        public NoteEntity UploadImage(long noteId, long userId, IFormFile image)
+        {
+            try
+            {
+                // Fetch All the details with the given noteId and userId
+                var note = this.fundooContext.Notes.FirstOrDefault(n => n.NotesId == noteId && n.id == userId);
+                if (note != null)
+                {
+                    Account acc = new Account(_config["Cloudinary:CloudName"], _config["Cloudinary:ApiKey"], _config["Cloudinary:ApiSecret"]);
+                    Cloudinary cloud = new Cloudinary(acc);
+                    var imagePath = image.OpenReadStream();
+                    var uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription(image.FileName, imagePath),
+                    };
+                    var uploadResult = cloud.Upload(uploadParams);
+                    note.Image = image.FileName;
+                    this.fundooContext.Notes.Update(note);
+                    int upload = this.fundooContext.SaveChanges();
+                    if (upload > 0)
+                    {
+                        return note;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        //Method to ChangeColor Details.
+        public bool ChangeColour(long noteId, long userId, ChangeColour notesModel)
+        {
+            try
+            {
+                var result = fundooContext.Notes.FirstOrDefault(e => e.NotesId == noteId && e.id == userId);
+
+                if (result != null)
+                {
+                    result.Colour = notesModel.Colour;
+                    result.ModifierAt = DateTime.Now;
+                }
+                int changes = fundooContext.SaveChanges();
+
+                if (changes > 0)
+                {
+                    return true;
+                }
+                else { return false; }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        //Method to GetNoteId Details.
+        public NoteEntity GetNoteId(long noteId, long userId)
+        {
+            var result = fundooContext.Notes.FirstOrDefault(e => e.NotesId == noteId && e.id == userId);
+
+            return result;
         }
     }
 }

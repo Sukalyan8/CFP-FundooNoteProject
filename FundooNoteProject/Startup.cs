@@ -40,7 +40,17 @@ namespace FundooNote
             services.AddTransient<IUserRL, UserRL>();
             services.AddTransient<INoteBL, NoteBL>();
             services.AddTransient<INoteRL, NoteRL>();
+            services.AddTransient<ICollabBL, CollabBL>();
+            services.AddTransient<ICollabRL, CollabRL>();
+            services.AddTransient<ILabelBL, LabelBL>();
+            services.AddTransient<ILabelRL, LabelRL>();
             services.AddSwaggerGen();
+            services.AddSwaggerGen(o => o.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo
+            {
+                Title = "MyApi",
+                Version = "v2",
+                Description = "Des2"
+            }));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fundoo-Notes", Version = "v1" });
@@ -106,9 +116,11 @@ namespace FundooNote
                 endpoints.MapControllers();
             });
             app.UseSwagger();
+            
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Fundoo Notes");
             });
+            
         }
     }
 }

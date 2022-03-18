@@ -66,3 +66,14 @@ C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore
 C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
 C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Experimental.System.Messaging.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Microsoft.Extensions.WebEncoders.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Octokit.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
+C:\Users\Hp\source\repos\FundooNote\bin\Debug\netcoreapp3.1\Xamarin.Essentials.dll

@@ -25,6 +25,13 @@ namespace RepositoryLayer.Service
 
         }
 
+        public UserEntity GetEmail(string Email)
+        {
+            var result = fundooContext.User.FirstOrDefault(e => e.Email == Email);
+
+            return result;
+        }
+
         public UserEntity Registration(UserRegModel User)
         {
             try
