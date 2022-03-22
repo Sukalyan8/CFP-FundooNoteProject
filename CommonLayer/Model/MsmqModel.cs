@@ -43,11 +43,11 @@ namespace CommonLayer.Model
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com")
                 {
                     Port = 587,
-                    Credentials = new NetworkCredential("sukalyandash96@gmail.com", "Sukalyan@96"),
+                    Credentials = new NetworkCredential("papunisr89@gmail.com", "Papuni@89"),
                     EnableSsl = true
                 };
-                mailMessage.From = new MailAddress("sukalyandash96@gmail.com");
-                mailMessage.To.Add(new MailAddress("sukalyandash96@gmail.com"));
+                mailMessage.From = new MailAddress("papunisr89@gmail.com");
+                mailMessage.To.Add(new MailAddress("papunisr89@gmail.com"));
                 mailMessage.Body = token;
                 mailMessage.Subject = "FundooNote App Reset Link";
                 smtpClient.Send(mailMessage);

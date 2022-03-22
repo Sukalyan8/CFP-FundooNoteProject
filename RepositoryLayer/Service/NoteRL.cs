@@ -109,6 +109,26 @@ namespace RepositoryLayer.Service
 
 
         }
+        public List<NoteEntity> GetAllNotes()
+        {
+            try
+            {
+                // Fetch All the details from Notes Table
+                var notes = this.fundooContext.Notes.ToList();
+                if (notes != null)
+                {
+                    return notes;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public bool DeleteNote(long noteId)
         {
             try

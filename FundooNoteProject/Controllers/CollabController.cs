@@ -2,10 +2,14 @@
 using CommonLayer.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
 using RepositoryLayer.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using HttpDeleteAttribute = Microsoft.AspNetCore.Mvc.HttpDeleteAttribute;
@@ -19,9 +23,14 @@ namespace FundooNote.Controllers
     public class CollabController : ControllerBase
     {
         private readonly ICollabBL collabBL;
-        public CollabController(ICollabBL collabBL)
+        private readonly IMemoryCache memoryCache;
+        private readonly IDistributedCache distributedCache;
+        public CollabController(ICollabBL collabBL, IMemoryCache memoryCache, IDistributedCache distributedCache)
         {
             this.collabBL = collabBL;
+            this.memoryCache = memoryCache;
+            this.distributedCache = distributedCache;
+
         }
         [Authorize]
         [HttpPost("AddCollab")]
@@ -96,6 +105,51 @@ namespace FundooNote.Controllers
             {
                 throw;
             }
+        }
+        [HttpGet("GetAll")]
+        public List<CollaboratorEntity> GetAllCollab()
+        {
+            try
+            {
+                var result = this.collabBL.GetAllCollab();
+                if (result != null)
+                {
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        [HttpGet("redis")]
+        public async Task<IActionResult> GetAllNotesUsingRedisCache()
+        {
+            var cacheKey = "List";
+            string serializedCollabList;
+            var CollabList = new List<CollaboratorEntity>();
+            var redisCollabList = await distributedCache.GetAsync(cacheKey);
+            if (redisCollabList != null)
+            {
+                serializedCollabList = Encoding.UTF8.GetString(redisCollabList);
+                CollabList = JsonConvert.DeserializeObject<List<CollaboratorEntity>>(serializedCollabList);
+            }
+            else
+            {
+                long userId = Convert.ToInt32(User.Claims.FirstOrDefault(e => e.Type == "Id").Value);
+                CollabList = (List<CollaboratorEntity>)this.collabBL.GetAllCollab();
+                serializedCollabList = JsonConvert.SerializeObject(CollabList);
+                redisCollabList = Encoding.UTF8.GetBytes(serializedCollabList);
+                var options = new DistributedCacheEntryOptions()
+                    .SetAbsoluteExpiration(DateTime.Now.AddMinutes(10))
+                    .SetSlidingExpiration(TimeSpan.FromMinutes(2));
+                await distributedCache.SetAsync(cacheKey, redisCollabList, options);
+            }
+            return Ok(CollabList);
         }
     }
 }

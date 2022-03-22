@@ -36,11 +36,12 @@ namespace RepositoryLayer.Service
         {
             try
             {
+
                 UserEntity userEntity = new UserEntity();
                 userEntity.FirstName = User.FirstName;
                 userEntity.LastName = User.LastName;
                 userEntity.Email = User.Email;
-                userEntity.Password = User.Password;
+                userEntity.Password = this.EncryptPassword(User.Password);
                 fundooContext.Add(userEntity);
                 int result = fundooContext.SaveChanges();
                 if (result > 0)
@@ -55,24 +56,28 @@ namespace RepositoryLayer.Service
                 throw;
             }
         }
+        
         public string login(UserLogin userLogin)
         {
             try
             {
-                var user = fundooContext.User.Where(x => x.Email == userLogin.Email && x.Password == userLogin.Password).FirstOrDefault();
-                if (user!= null)
+                // if Email and password is empty return null. 
+                if (string.IsNullOrEmpty(userLogin.Email) || string.IsNullOrEmpty(userLogin.Password))
                 {
-                    string token = GenerateSecurityToken(user.Email, user.Id);
-                    return token;
-                 
+                    return null;
                 }
-                return null;
-                //string token = GenerateSecurityToken(user.Email, user.Id);
-                //return token;
+                var result = fundooContext.User.Where(x => x.Email == userLogin.Email).FirstOrDefault();
+                string dcryptPass = this.DecryptPassword(result.Password);
+                if (result != null && dcryptPass == userLogin.Password)
+                {
+                    string token = GenerateSecurityToken(result.Email, result.Id);
+                    return token;
+                }
+                else
+                    return null;
             }
             catch (Exception)
             {
-
                 throw;
             }
 

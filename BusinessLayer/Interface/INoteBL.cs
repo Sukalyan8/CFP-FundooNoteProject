@@ -13,6 +13,7 @@ namespace BusinessLayer.Interface
         public NoteEntity CreateNote(NotesModel Notes, long userId);
         public NoteEntity UpdateNote(UpdateNote updateNote, long noteId);
         public NoteEntity getNote(long noteId);
+        public List<NoteEntity> GetAllNotes();
         public bool DeleteNote(long noteId);
         public bool IsPinned(long noteId);
         public bool IsArchieve(long noteId);

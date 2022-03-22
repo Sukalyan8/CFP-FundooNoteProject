@@ -51,6 +51,11 @@ namespace FundooNote
                 Version = "v2",
                 Description = "Des2"
             }));
+            services.AddMemoryCache();
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = "localhost:6379";
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fundoo-Notes", Version = "v1" });

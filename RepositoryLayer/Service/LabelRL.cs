@@ -88,6 +88,26 @@ namespace RepositoryLayer.Service
                 throw;
             }
         }
+        public List<LabelEntity> GetAllLabel()
+        {
+            try
+            {
+                // Fetch All the details from Label Table
+                var data = this.fundooContext.Label.ToList();
+                if (data != null)
+                {
+                    return data;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public bool RemoveLabel(long labelId, long userId)
         {
             try

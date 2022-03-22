@@ -14,6 +14,7 @@ namespace RepositoryLayer.Interface
 
         public NoteEntity UpdateNote(UpdateNote updateNote, long noteId);
         public NoteEntity getNote(long noteId);
+        public List<NoteEntity> GetAllNotes();
         public bool DeleteNote(long noteId);
         public bool IsPinned(long noteId);
         public bool IsArchieve(long noteId);

@@ -36,31 +36,6 @@
           }
         }
       },
-      "Microsoft.AspNet.Mvc/4.0.20710": {
-        "dependencies": {
-          "Microsoft.AspNet.Razor": "2.0.20710",
-          "Microsoft.AspNet.WebPages": "2.0.20710"
-        },
-        "runtime": {
-          "lib/net40/System.Web.Mvc.dll": {
-            "assemblyVersion": "4.0.0.0",
-            "fileVersion": "4.0.20710.0"
-          }
-        }
-      },
-      "Microsoft.AspNet.Razor/2.0.20710": {
-        "runtime": {
-          "lib/net40/System.Web.Razor.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.20710.0"
-          }
-        }
-      },
-      "Microsoft.AspNet.WebApi/4.0.20710": {
-        "dependencies": {
-          "Microsoft.AspNet.WebApi.WebHost": "4.0.20710"
-        }
-      },
       "Microsoft.AspNet.WebApi.Client/4.0.20710": {
         "dependencies": {
           "Microsoft.Net.Http": "2.0.20710",
@@ -93,30 +68,6 @@
           "lib/net40/System.Web.Http.WebHost.dll": {
             "assemblyVersion": "4.0.0.0",
             "fileVersion": "4.0.20710.0"
-          }
-        }
-      },
-      "Microsoft.AspNet.WebPages/2.0.20710": {
-        "dependencies": {
-          "Microsoft.AspNet.Razor": "2.0.20710",
-          "Microsoft.Web.Infrastructure": "1.0.0"
-        },
-        "runtime": {
-          "lib/net40/System.Web.Helpers.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.20710.0"
-          },
-          "lib/net40/System.Web.WebPages.Deployment.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.20710.0"
-          },
-          "lib/net40/System.Web.WebPages.Razor.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.20710.0"
-          },
-          "lib/net40/System.Web.WebPages.dll": {
-            "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.0.20710.0"
           }
         }
       },
@@ -513,13 +464,20 @@
           }
         }
       },
-      "Swashbuckle/3.1.0": {
+      "Swashbuckle/5.6.0": {
         "dependencies": {
-          "Microsoft.AspNet.Mvc": "4.0.20710",
-          "Microsoft.AspNet.WebApi": "4.0.20710"
+          "Microsoft.AspNet.WebApi.WebHost": "4.0.20710",
+          "Swashbuckle.Core": "5.6.0",
+          "WebActivatorEx": "2.0.0"
+        }
+      },
+      "Swashbuckle.Core/5.6.0": {
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.Core": "4.0.20710",
+          "Newtonsoft.Json": "12.0.3"
         },
         "runtime": {
-          "lib/net40/Swashbuckle.dll": {
+          "lib/net40/Swashbuckle.Core.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
@@ -1097,6 +1055,17 @@
           "System.Xml.XmlDocument": "4.3.0"
         }
       },
+      "WebActivatorEx/2.0.0": {
+        "dependencies": {
+          "Microsoft.Web.Infrastructure": "1.0.0"
+        },
+        "runtime": {
+          "lib/net40/WebActivatorEx.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
       "Xamarin.Essentials/1.7.1": {
         "dependencies": {
           "System.Numerics.Vectors": "4.5.0"
@@ -1125,7 +1094,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.0",
           "Microsoft.IdentityModel.Tokens": "6.16.0",
           "Octokit": "0.50.0",
-          "Swashbuckle": "3.1.0",
+          "Swashbuckle": "5.6.0",
           "System.IdentityModel.Tokens.Jwt": "6.16.0",
           "Xamarin.Essentials": "1.7.1"
         },
@@ -1155,27 +1124,6 @@
       "path": "experimental.system.messaging/1.1.0",
       "hashPath": "experimental.system.messaging.1.1.0.nupkg.sha512"
     },
-    "Microsoft.AspNet.Mvc/4.0.20710": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-h6oV6Zh+jM20v+lgnU1oL7JlVqI6Q+k7FN3VYXnY7wjqU3wTBfest+iNdAUZ2OYTo62hfI286LyqRyGDaXHmAA==",
-      "path": "microsoft.aspnet.mvc/4.0.20710",
-      "hashPath": "microsoft.aspnet.mvc.4.0.20710.nupkg.sha512"
-    },
-    "Microsoft.AspNet.Razor/2.0.20710": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-JkaLdzjXnjcd8JAaAAtahMtqORdBfX2pOlVdv7khq2hKBLqjdP+5q2LVLmbLecFGxoW9inDNjZKvwdVuiwFbZg==",
-      "path": "microsoft.aspnet.razor/2.0.20710",
-      "hashPath": "microsoft.aspnet.razor.2.0.20710.nupkg.sha512"
-    },
-    "Microsoft.AspNet.WebApi/4.0.20710": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-wlNutdt6xneIyIho124e2tV5VZ9jV2NXgC53dug46s/VWzmrm3zz4Pqe0lWsQWDfYaVhxKPhPZqPiLQ9plCTSA==",
-      "path": "microsoft.aspnet.webapi/4.0.20710",
-      "hashPath": "microsoft.aspnet.webapi.4.0.20710.nupkg.sha512"
-    },
     "Microsoft.AspNet.WebApi.Client/4.0.20710": {
       "type": "package",
       "serviceable": true,
@@ -1196,13 +1144,6 @@
       "sha512": "sha512-Pqje5F4BJvnN6z2eSIuyCCZNJbIPap/4bYfvvHYy/kiYPj7+cFK+tgcSKWgITwk+6K8v+Bf3Et16DXQQuK+wEg==",
       "path": "microsoft.aspnet.webapi.webhost/4.0.20710",
       "hashPath": "microsoft.aspnet.webapi.webhost.4.0.20710.nupkg.sha512"
-    },
-    "Microsoft.AspNet.WebPages/2.0.20710": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-bpWbVKW0RpM/XtTwZL7pjhuVqpaB/cHutR7W4YXLIXFMHHXilqzVxpFmyzwoIZVO1xmSdoelbDRBncIA5D24EA==",
-      "path": "microsoft.aspnet.webpages/2.0.20710",
-      "hashPath": "microsoft.aspnet.webpages.2.0.20710.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Html.Abstractions/2.2.0": {
       "type": "package",
@@ -1484,12 +1425,19 @@
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
     },
-    "Swashbuckle/3.1.0": {
+    "Swashbuckle/5.6.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-sF/d3adZH+nNXi3eF80eyt1LcA+ibiJRVU8G38iAvwtVrOWoCIgyLc2dwPs8uFROchL+R4H+EGYVEkuJ3MBUyQ==",
-      "path": "swashbuckle/3.1.0",
-      "hashPath": "swashbuckle.3.1.0.nupkg.sha512"
+      "sha512": "sha512-UAE91ynpgvwoUs8igq3k/D0HV+cHrGRGJR9cwIPGE08hHJenn24MR2vq1n6NYbDWEwAVm+RYUW+qIsO9p5Sn/Q==",
+      "path": "swashbuckle/5.6.0",
+      "hashPath": "swashbuckle.5.6.0.nupkg.sha512"
+    },
+    "Swashbuckle.Core/5.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GhVWgtB8hCOxQhx7zLiiRyoi6flm7fNDDGILYHWktxLMkykRUz90fhmLRZECmnbvCcepFyROiw3phS1XorhdDg==",
+      "path": "swashbuckle.core/5.6.0",
+      "hashPath": "swashbuckle.core.5.6.0.nupkg.sha512"
     },
     "System.Collections/4.3.0": {
       "type": "package",
@@ -1924,6 +1872,13 @@
       "sha512": "sha512-MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q==",
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    },
+    "WebActivatorEx/2.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-B3ZbOEaGCqa7BLjZZw6wqprOJJMvP39h7Lr5ADkJOCPKHppAaCre34kR63/gfgpM4htzTfgm/pEw7r7qqqMgIA==",
+      "path": "webactivatorex/2.0.0",
+      "hashPath": "webactivatorex.2.0.0.nupkg.sha512"
     },
     "Xamarin.Essentials/1.7.1": {
       "type": "package",
