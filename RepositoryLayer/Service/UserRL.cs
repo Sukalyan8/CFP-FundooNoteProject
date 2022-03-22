@@ -56,6 +56,25 @@ namespace RepositoryLayer.Service
                 throw;
             }
         }
+        /// <summary>
+        /// Method for EncryptPassword
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public string EncryptPassword(string password)
+        {
+            try
+            {
+                byte[] encode = new byte[password.Length];
+                encode = Encoding.UTF8.GetBytes(password);
+                string encryptPass = Convert.ToBase64String(encode);
+                return encryptPass;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         
         public string login(UserLogin userLogin)
         {
